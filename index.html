@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивный отчет: Мессенджеры в ЭДО и ИТ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9FAFB;
+            color: #1F2937;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+        .nav-link.active {
+            color: #3B82F6;
+            border-bottom-color: #3B82F6;
+        }
+        .nav-link:hover {
+            color: #3B82F6;
+        }
+        .tab-btn.active {
+            background-color: #3B82F6;
+            color: white;
+        }
+    </style>
+</head>
+<body class="scroll-smooth">
+    <!-- Chosen Palette: Calm Tech -->
+    <!-- Application Structure Plan: The SPA uses a thematic, single-page scrolling structure with a sticky nav for easy access to key sections: General Role, Application in Education, Interactive Case Studies, The Future (MAX), and Conclusion. This structure organizes the qualitative report content logically for exploration, rather than a rigid slide-by-slide format. The core interaction is the case study comparison, allowing users to dynamically switch between schools and see their communication ecosystems visualized, which is more engaging than static lists. -->
+    <!-- Visualization & Content Choices: Report Info: School communication channels -> Goal: Compare -> Viz: Toggled content blocks with icons and a bar chart (Chart.js) -> Interaction: User clicks buttons to switch school data and update the chart -> Justification: Visually compares the communication strategies of the two schools, highlighting the 'multi-level' system of the Gazprombank school more effectively than text alone. Report Info: Features of Messengers -> Goal: Inform -> Viz: Interactive cards (HTML/CSS/JS) -> Interaction: Hover or click to reveal details -> Justification: Breaks down information into digestible chunks, encouraging user engagement. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3">
+            <ul class="flex justify-center space-x-4 md:space-x-8 text-sm md:text-base font-medium text-gray-600">
+                <li><a href="#role" class="nav-link py-2 border-b-2 border-transparent">Роль в ЭДО</a></li>
+                <li><a href="#education" class="nav-link py-2 border-b-2 border-transparent">В образовании</a></li>
+                <li><a href="#cases" class="nav-link py-2 border-b-2 border-transparent">Кейсы</a></li>
+                <li><a href="#future" class="nav-link py-2 border-b-2 border-transparent">Будущее</a></li>
+                <li><a href="#conclusion" class="nav-link py-2 border-b-2 border-transparent">Выводы</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 md:py-16">
+
+        <section id="hero" class="text-center mb-16 md:mb-24">
+            <h1 class="text-3xl md:text-5xl font-bold text-gray-800 mb-4">Мессенджеры в ЭДО и ИТ</h1>
+            <p class="text-lg md:text-xl text-gray-500 max-w-3xl mx-auto">Анализ роли и применения в корпоративной и образовательной сферах.</p>
+            <div class="mt-6 text-sm text-gray-400">
+                <p>По материалам студентов группы ПОПАН-211:</p>
+                <p>Джангозова Э.Э., Кадошников П. А., Лысенко М. Д.</p>
+            </div>
+        </section>
+
+        <section id="role" class="mb-16 md:mb-24 scroll-mt-20">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Ключевая роль в системе ЭДО и ИТ</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="font-bold text-lg mb-2 text-blue-600">Оперативность</h3>
+                    <p class="text-gray-600 text-sm">Мгновенный обмен сообщениями, файлами и документами, что сокращает время на обработку информации.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="font-bold text-lg mb-2 text-blue-600">Интеграция</h3>
+                    <p class="text-gray-600 text-sm">Связь с CRM, системами управления проектами и ЭДО для централизованного хранения и обмена документами.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="font-bold text-lg mb-2 text-blue-600">Прозрачность</h3>
+                    <p class="text-gray-600 text-sm">Фиксация хода обсуждений и принятия решений в чатах и каналах для эффективного контроля и аудита.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="font-bold text-lg mb-2 text-blue-600">Гибкость</h3>
+                    <p class="text-gray-600 text-sm">Поддержка удалённой и гибридной работы из любого места и на любом устройстве.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="mb-16 md:mb-24 scroll-mt-20">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Применение в сфере образования</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">Мессенджеры создают единое коммуникационное пространство, связывая всех участников образовательного процесса. Это повышает эффективность и вовлеченность.</p>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-lg mb-3">Направления использования:</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">●</span> Улучшение коммуникации между всеми участниками.</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">●</span> Повышение вовлечённости родителей и учеников.</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">●</span> Оптимизация административных процессов.</li>
+                    </ul>
+                </div>
+                <div class="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-6 rounded-r-lg">
+                    <h3 class="font-bold text-lg mb-3">Риски и ограничения:</h3>
+                    <p>Ключевой задачей является обеспечение безопасности и конфиденциальности данных, а также установление четких правил использования платформ для предотвращения нецелевого общения и кибербуллинга.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="cases" class="mb-16 md:mb-24 scroll-mt-20">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-4">Практические кейсы: Школы</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">Анализ показывает, как современные школы выстраивают свои цифровые коммуникационные экосистемы.</p>
+            <div class="flex justify-center mb-8">
+                <div class="flex space-x-2 bg-gray-200 p-1 rounded-full">
+                    <button id="btn-school1415" class="tab-btn px-4 py-2 text-sm font-medium rounded-full transition-colors duration-300">Школа №1415</button>
+                    <button id="btn-gazprom" class="tab-btn px-4 py-2 text-sm font-medium rounded-full transition-colors duration-300">Школа Газпромбанка</button>
+                </div>
+            </div>
+            <div id="case-content" class="bg-white p-6 md:p-8 rounded-xl shadow-lg transition-opacity duration-500">
+            </div>
+        </section>
+
+        <section id="future" class="mb-16 md:mb-24 scroll-mt-20">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-4">Будущее за специализированными решениями</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">С недавнего времени мессенджер <span class="font-bold text-blue-600">MAX</span> стал обязательным в сфере образования, предлагая безопасную и управляемую среду.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div class="bg-white p-5 rounded-lg border border-gray-200">
+                    <h3 class="font-semibold text-gray-800 mb-1">Целевое назначение</h3>
+                    <p class="text-sm text-gray-600">Разработан специально для нужд образовательной сферы.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg border border-gray-200">
+                    <h3 class="font-semibold text-gray-800 mb-1">Безопасность</h3>
+                    <p class="text-sm text-gray-600">Обеспечение защищенной и конфиденциальной среды для обмена данными.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg border border-gray-200">
+                    <h3 class="font-semibold text-gray-800 mb-1">Удобство</h3>
+                    <p class="text-sm text-gray-600">Унифицированный и управляемый канал для всех коммуникаций.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg border border-gray-200">
+                    <h3 class="font-semibold text-gray-800 mb-1">Интеграция</h3>
+                    <p class="text-sm text-gray-600">Поддержка административных процессов и рабочих задач.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg border border-gray-200">
+                    <h3 class="font-semibold text-gray-800 mb-1">Вовлечённость</h3>
+                    <p class="text-sm text-gray-600">Простой и эффективный инструмент для всех участников процесса.</p>
+                </div>
+                <div class="bg-blue-50 p-5 rounded-lg border border-blue-200 text-center flex items-center justify-center">
+                    <p class="text-blue-700 font-medium">Современный, удобный и безопасный инструмент для управления учебным процессом.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion" class="scroll-mt-20">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Итоги и перспективы</h2>
+            <div class="bg-white rounded-xl shadow-lg p-8 md:p-10 max-w-4xl mx-auto">
+                <p class="text-gray-700 mb-4">Современные школы активно формируют единые цифровые коммуникационные пространства, объединяя педагогов, родителей, учеников и администрацию. Эта практика способствует <span class="font-semibold">оперативности, прозрачности и вовлечённости</span> всех участников образовательного процесса.</p>
+                <p class="text-gray-700 font-medium text-blue-700">Переход к специализированным решениям, таким как мессенджер MAX, открывает перспективы создания безопасной, управляемой и максимально эффективной цифровой среды в системе российского образования.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8 mt-12 border-t">
+        <p class="text-gray-500 text-sm">Интерактивный отчет, 2025</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const caseData = {
+                school1415: {
+                    title: 'Кейс: Школа №1415 Останкино, г. Москва',
+                    description: 'Школа использует популярные мессенджеры для решения ключевых коммуникационных задач, охватывая как внутренние, так и внешние процессы.',
+                    channels: [
+                        { name: 'Telegram', use: 'Основной канал для внутренней коммуникации педагогов и оперативного информирования родителей.' },
+                        { name: 'WhatsApp', use: 'Используется для быстрой связи в родительских чатах и координации по классам.' },
+                        { name: 'Другие каналы', use: 'Дополнительные средства связи для административных и организационных вопросов.' }
+                    ],
+                    chart: null
+                },
+                gazprom: {
+                    title: 'Кейс: ОЧУ «Школа Газпромбанка»',
+                    description: 'Школа выстроила системную и многоуровневую коммуникацию, разделяя каналы по целям и аудиториям для максимальной эффективности.',
+                    channels: [
+                        { name: 'Telegram и WhatsApp', use: 'Для оперативного общения внутри коллектива и с родителями.' },
+                        { name: 'Gmail', use: 'Для официальной переписки с учениками по учебным вопросам.' },
+                        { name: 'Telegram и VK', use: 'Каналы для внешней информационной поддержки и продвижения школьной жизни.' }
+                    ],
+                    chart: {
+                        labels: ['Внутренние операции', 'Общение с родителями', 'Связь с учениками', 'Внешние коммуникации'],
+                        data: [2, 2, 1, 2],
+                        label: 'Количество каналов по задачам'
+                    }
+                }
+            };
+
+            const contentContainer = document.getElementById('case-content');
+            const btnSchool1415 = document.getElementById('btn-school1415');
+            const btnGazprom = document.getElementById('btn-gazprom');
+            let chartInstance = null;
+
+            function renderCase(data) {
+                contentContainer.innerHTML = '';
+                contentContainer.style.opacity = 0;
+
+                let html = `
+                    <h3 class="font-bold text-xl mb-2">${data.title}</h3>
+                    <p class="text-gray-600 mb-6">${data.description}</p>
+                    <div class="grid ${data.chart ? 'md:grid-cols-2' : ''} gap-8 items-center">
+                        <div>
+                            <h4 class="font-semibold mb-4">Каналы коммуникации:</h4>
+                            <ul class="space-y-3">
+                                ${data.channels.map(ch => `
+                                    <li class="p-3 bg-gray-50 rounded-lg border-l-4 border-blue-500">
+                                        <p class="font-medium text-gray-800">${ch.name}</p>
+                                        <p class="text-sm text-gray-600">${ch.use}</p>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        ${data.chart ? `
+                        <div class="mt-6 md:mt-0">
+                             <div class="chart-container">
+                                <canvas id="caseChart"></canvas>
+                             </div>
+                        </div>
+                        ` : '<div class="hidden md:block p-4 bg-gray-50 rounded-lg text-center text-gray-500">Визуализация для данного кейса не предусмотрена.</div>'}
+                    </div>
+                `;
+                
+                setTimeout(() => {
+                    contentContainer.innerHTML = html;
+                    contentContainer.style.opacity = 1;
+                    if (data.chart) {
+                        renderChart(data.chart);
+                    }
+                }, 100);
+            }
+
+            function renderChart(chartData) {
+                if (chartInstance) {
+                    chartInstance.destroy();
+                }
+                const ctx = document.getElementById('caseChart').getContext('2d');
+                chartInstance = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: chartData.labels,
+                        datasets: [{
+                            label: chartData.label,
+                            data: chartData.data,
+                            backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'Уровни коммуникационной системы'
+                            }
+                        }
+                    }
+                });
+            }
+
+            btnSchool1415.addEventListener('click', () => {
+                btnSchool1415.classList.add('active');
+                btnGazprom.classList.remove('active');
+                renderCase(caseData.school1415);
+            });
+
+            btnGazprom.addEventListener('click', () => {
+                btnGazprom.classList.add('active');
+                btnSchool1415.classList.remove('active');
+                renderCase(caseData.gazprom);
+            });
+            
+            btnSchool1415.click();
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section[id]');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 80) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
