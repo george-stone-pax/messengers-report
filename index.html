@@ -3,323 +3,502 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Интерактивный отчет: Мессенджеры в ЭДО и ИТ</title>
+    <title>Экономическая модель: Your English Tutor</title>
+    <!-- Подключение Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Подключение шрифта Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F9FAFB;
-            color: #1F2937;
+            /* Устанавливаем базовый размер шрифта */
+            @apply text-base; 
         }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 50vh;
+        /* Стили для активной вкладки */
+        .tab-button.active {
+            border-bottom-color: #2563EB; /* blue-600 */
+            color: #2563EB;
         }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-            }
-        }
-        .nav-link {
-            transition: color 0.3s, border-bottom-color 0.3s;
-        }
-        .nav-link.active {
-            color: #3B82F6;
-            border-bottom-color: #3B82F6;
-        }
-        .nav-link:hover {
-            color: #3B82F6;
-        }
-        .tab-btn.active {
-            background-color: #3B82F6;
-            color: white;
+        /* Базовый стиль для кнопок вкладок */
+        .tab-button {
+            border-bottom-width: 4px;
+            border-bottom-color: transparent;
+            transition: all 0.3s ease;
         }
     </style>
 </head>
-<body class="scroll-smooth">
-    <!-- Chosen Palette: Calm Tech -->
-    <!-- Application Structure Plan: The SPA uses a thematic, single-page scrolling structure with a sticky nav for easy access to key sections: General Role, Application in Education, Interactive Case Studies, The Future (MAX), and Conclusion. This structure organizes the qualitative report content logically for exploration, rather than a rigid slide-by-slide format. The core interaction is the case study comparison, allowing users to dynamically switch between schools and see their communication ecosystems visualized, which is more engaging than static lists. -->
-    <!-- Visualization & Content Choices: Report Info: School communication channels -> Goal: Compare -> Viz: Toggled content blocks with icons and a bar chart (Chart.js) -> Interaction: User clicks buttons to switch school data and update the chart -> Justification: Visually compares the communication strategies of the two schools, highlighting the 'multi-level' system of the Gazprombank school more effectively than text alone. Report Info: Features of Messengers -> Goal: Inform -> Viz: Interactive cards (HTML/CSS/JS) -> Interaction: Hover or click to reveal details -> Justification: Breaks down information into digestible chunks, encouraging user engagement. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+<body class="bg-gray-100">
 
-    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-3">
-            <ul class="flex justify-center space-x-4 md:space-x-8 text-sm md:text-base font-medium text-gray-600">
-                <li><a href="#role" class="nav-link py-2 border-b-2 border-transparent">Роль в ЭДО</a></li>
-                <li><a href="#education" class="nav-link py-2 border-b-2 border-transparent">В образовании</a></li>
-                <li><a href="#cases" class="nav-link py-2 border-b-2 border-transparent">Кейсы</a></li>
-                <li><a href="#future" class="nav-link py-2 border-b-2 border-transparent">Будущее</a></li>
-                <li><a href="#conclusion" class="nav-link py-2 border-b-2 border-transparent">Выводы</a></li>
-            </ul>
+    <div class="container max-w-6xl mx-auto p-4 md:p-8">
+        <!-- Заголовок отчета -->
+        <header class="mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800">
+                Бизнес-модель и стратегия развития
+            </h1>
+            <p class="text-2xl text-blue-600">Проект "Your English Tutor is Here"</p>
+        </header>
+
+        <!-- Навигация по вкладкам -->
+        <nav class="flex flex-wrap border-b-2 border-gray-300 mb-6" id="tab-nav">
+            <button data-tab="model" class="tab-button py-3 px-4 text-sm md:text-base font-medium text-gray-600 hover:text-blue-600 active">
+                1. Экономическая Модель
+            </button>
+            <button data-tab="marketing" class="tab-button py-3 px-4 text-sm md:text-base font-medium text-gray-600 hover:text-blue-600">
+                2. Маркетинг и Привлечение
+            </button>
+            <button data-tab="team" class="tab-button py-3 px-4 text-sm md:text-base font-medium text-gray-600 hover:text-blue-600">
+                3. Команда и Роли
+            </button>
+            <button data-tab="career" class="tab-button py-3 px-4 text-sm md:text-base font-medium text-gray-600 hover:text-blue-600">
+                4. Карьерный Рост
+            </button>
+            <button data-tab="resources" class="tab-button py-3 px-4 text-sm md:text-base font-medium text-gray-600 hover:text-blue-600">
+                5. Ресурсы и Развитие
+            </button>
         </nav>
-    </header>
 
-    <main class="container mx-auto px-6 py-8 md:py-16">
+        <!-- Контент вкладок -->
+        <main id="tab-content">
+            <!-- Секция 1: Экономическая Модель -->
+            <section data-content="model" class="tab-content bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">1. Экономическая Модель: "Синергетический Маховик"</h2>
+                
+                <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                    Наша модель основана не на одном продукте, а на <strong class="font-semibold">экосистеме</strong>, где каждый элемент усиливает другой. Это создает "маховик", который привлекает, вовлекает, обучает и монетизирует аудиторию.
+                </p>
 
-        <section id="hero" class="text-center mb-16 md:mb-24">
-            <h1 class="text-3xl md:text-5xl font-bold text-gray-800 mb-4">Мессенджеры в ЭДО и ИТ</h1>
-            <p class="text-lg md:text-xl text-gray-500 max-w-3xl mx-auto">Анализ роли и применения в корпоративной и образовательной сферах.</p>
-            <div class="mt-6 text-sm text-gray-400">
-                <p>По материалам студентов группы ПОПАН-211:</p>
-                <p>Джангозова Э.Э., Кадошников П. А., Лысенко М. Д.</p>
-            </div>
-        </section>
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-blue-50 p-4 rounded-lg shadow">
+                        <h3 class="font-bold text-blue-800">1. Привлечение (Верх воронки)</h3>
+                        <p class="text-base text-blue-700">Бесплатный ценный контент:</p>
+                        <ul class="list-disc list-inside ml-2 text-base text-blue-700 mt-2">
+                            <li>Telegram-канал (посты, викторины)</li>
+                            <li>Сайт (бесплатные игры, статьи)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg shadow">
+                        <h3 class="font-bold text-green-800">2. Вовлечение (Продукт-магнит)</h3>
+                        <p class="text-base text-green-700">Недорогой и полезный продукт:</p>
+                        <ul class="list-disc list-inside ml-2 text-base text-green-700 mt-2">
+                            <li>Курс на Stepik (500 руб.)</li>
+                            <li>Интеграция курса с играми на сайте</li>
+                        </ul>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg shadow">
+                        <h3 class="font-bold text-purple-800">3. Монетизация (Флагманский продукт)</h3>
+                        <p class="text-base text-purple-700">Персонализированная услуга:</p>
+                        <ul class="list-disc list-inside ml-2 text-base text-purple-700 mt-2">
+                            <li>Индивидуальное репетиторство</li>
+                            <li>Прямые продажи курса Stepik</li>
+                        </ul>
+                    </div>
+                </div>
 
-        <section id="role" class="mb-16 md:mb-24 scroll-mt-20">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Ключевая роль в системе ЭДО и ИТ</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
-                    <h3 class="font-bold text-lg mb-2 text-blue-600">Оперативность</h3>
-                    <p class="text-gray-600 text-sm">Мгновенный обмен сообщениями, файлами и документами, что сокращает время на обработку информации.</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
-                    <h3 class="font-bold text-lg mb-2 text-blue-600">Интеграция</h3>
-                    <p class="text-gray-600 text-sm">Связь с CRM, системами управления проектами и ЭДО для централизованного хранения и обмена документами.</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
-                    <h3 class="font-bold text-lg mb-2 text-blue-600">Прозрачность</h3>
-                    <p class="text-gray-600 text-sm">Фиксация хода обсуждений и принятия решений в чатах и каналах для эффективного контроля и аудита.</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
-                    <h3 class="font-bold text-lg mb-2 text-blue-600">Гибкость</h3>
-                    <p class="text-gray-600 text-sm">Поддержка удалённой и гибридной работы из любого места и на любом устройстве.</p>
-                </div>
-            </div>
-        </section>
+                <h3 class="text-2xl font-semibold text-gray-700 mt-6 mb-2">Экономическая Доминанта</h3>
+                <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                    Доминанта — это <strong class="font-semibold text-gray-900">конверсия из бесплатной аудитории в платных учеников на репетиторство</strong>. Курс Stepik и Telegram-канал служат не столько основными источниками дохода, сколько <strong class="font-semibold">системой фильтрации и подогрева</strong> лидов. Мы строим доверие через бесплатные материалы и недорогой курс, а затем предлагаем основную, высокомаржинальную услугу (репетиторство) уже лояльной аудитории.
+                </p>
 
-        <section id="education" class="mb-16 md:mb-24 scroll-mt-20">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Применение в сфере образования</h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">Мессенджеры создают единое коммуникационное пространство, связывая всех участников образовательного процесса. Это повышает эффективность и вовлеченность.</p>
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <h3 class="font-bold text-lg mb-3">Направления использования:</h3>
-                    <ul class="space-y-3 text-gray-700">
-                        <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">●</span> Улучшение коммуникации между всеми участниками.</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">●</span> Повышение вовлечённости родителей и учеников.</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">●</span> Оптимизация административных процессов.</li>
+                <h3 class="text-2xl font-semibold text-gray-700 mt-6 mb-2">Удовлетворение пользователя (Value Proposition)</h3>
+                <ul class="list-disc list-inside ml-4 text-lg text-gray-700 space-y-2">
+                    <li><strong class="font-semibold">"Попробуй, прежде чем купить":</strong> Бесплатные игры на сайте снимают барьер недоверия.</li>
+                    <li><strong class="font-semibold">Доступный вход:</strong> Курс на Stepik дает структурированные знания за минимальную цену.</li>
+                    <li><strong class="font-semibold">Геймификация:</strong> Игры на сайте делают рутинное обучение увлекательным (интеграция с курсом).
+                    <li><strong class="font-semibold">Сообщество:</strong> Telegram-канал создает ощущение причастности и постоянной поддержки.</li>
+                    <li><strong class="font-semibold">Комплексный подход:</strong> Пользователь получает не просто уроки, а целую среду для изучения языка (сайт + курс + канал + репетитор).</li>
+                </ul>
+            </section>
+
+            <!-- Секция 2: Маркетинг и Привлечение -->
+            <section data-content="marketing" class="tab-content hidden bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">2. Маркетинг и Привлечение Клиентов</h2>
+                <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                    Наша стратегия — микс из платного трафика для быстрых результатов и контент-маркетинга для долгосрочного роста.
+                </p>
+                
+                <h3 class="text-2xl font-semibold text-gray-700 mt-4 mb-2">Каналы привлечения:</h3>
+                <ul class="list-disc list-inside ml-4 text-lg text-gray-700 space-y-2">
+                    <li>
+                        <strong class="font-semibold">Платная реклама (VK Реклама):</strong>
+                        <ul class="list-inside list-['-_'] ml-6 text-base text-gray-600">
+                            <li>Таргетинг на аудиторию, интересующуюся изучением языков, с предложением записаться на репетиторство.</li>
+                            <li>Продвижение <strong class="font-semibold">курса Stepik</strong> через VK Рекламу для сбора "теплой" аудитории (цель - "дешевый" вход в воронку).</li>
+                            <li>Использование <strong class="font-semibold">VK Clips</strong> для вирального охвата и ретаргетинга на тех, кто просмотрел видео (ведение Элиной).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong class="font-semibold">Контент-маркетинг (SEO):</strong>
+                        <ul class="list-inside list-['-_'] ml-6 text-base text-gray-600">
+                            <li>Оптимизация игровых страниц и статей на сайте под поисковые запросы (например, "игры для изучения английского", "past simple упражнения"). Это создаст "вечнозеленый" органический трафик.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong class="font-semibold">SMM (Telegram-канал):</strong>
+                        <ul class="list-inside list-['-_'] ml-6 text-base text-gray-600">
+                            <li>Посевы в других Telegram-каналах схожей тематики (покупка рекламы).</li>
+                            <li>Создание вирального контента (полезные подборки, смешные мемы), которым подписчики будут делиться.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Новый раздел: Медиаплан -->
+                <h3 class="text-2xl font-semibold text-gray-700 mt-6 mb-4">Теоретический медиаплан (Бюджет: 10 000 ₽)</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <!-- VK Clips -->
+                    <div class="bg-blue-50 p-4 rounded-lg shadow border-l-4 border-blue-400">
+                        <h4 class="text-lg font-semibold text-blue-800">1. VK Clips (Бюджет: 4 000 ₽)</h4>
+                        <p class="text-base text-blue-700 mt-1"><strong>Цель:</strong> Виральный охват, узнаваемость, сбор "холодной" аудитории для ретаргетинга.</p>
+                        <p class="text-base text-blue-700 mt-2"><strong>Примерный KPI:</strong> ~80 000 просмотров</p>
+                        <p class="text-base text-blue-700 mt-1"><strong>Примерный CPC:</strong> ~10 ₽ (Cost Per Click)</p>
+                    </div>
+                    <!-- Telegram Посевы -->
+                    <div class="bg-green-50 p-4 rounded-lg shadow border-l-4 border-green-400">
+                        <h4 class="text-lg font-semibold text-green-800">2. Telegram Посевы (Бюджет: 6 000 ₽)</h4>
+                        <p class="text-base text-green-700 mt-1"><strong>Цель:</strong> Привлечение целевой, "теплой" аудитории в канал, получение подписчиков.</p>
+                        <p class="text-base text-green-700 mt-2"><strong>Примерный KPI:</strong> ~200 новых подписчиков</p>
+                        <p class="text-base text-green-700 mt-1"><strong>Примерный CPS:</strong> ~30 ₽ (Cost Per Subscriber)</p>
+                    </div>
+                </div>
+
+                <!-- Новая диаграмма роста -->
+                <h4 class="text-lg font-semibold text-gray-700 mt-6 mb-3">Диаграмма Роста (Прогноз)</h4>
+                <div class="space-y-4">
+                    <!-- Рост подписчиков Telegram -->
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-inner">
+                        <p class="text-base font-medium text-gray-600 mb-2">Подписчики Telegram (с посевов)</p>
+                        <div class="flex items-center justify-between text-lg md:text-xl font-bold">
+                            <div class="text-center">
+                                <span class="text-gray-500">Старт</span>
+                                <p class="text-3xl text-gray-700">54</p>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                            <div class="text-center">
+                                <span class="text-green-600">Прогноз</span>
+                                <p class="text-3xl text-green-700">254</p>
+                                <span class="text-sm font-normal text-green-600">(+200)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Рост покупателей Stepik -->
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-inner">
+                        <p class="text-base font-medium text-gray-600 mb-2">Покупатели Stepik (с VK Clips)</p>
+                        <div class="flex items-center justify-between text-lg md:text-xl font-bold">
+                            <div class="text-center">
+                                <span class="text-gray-500">Старт</span>
+                                <p class="text-3xl text-gray-700">12</p>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                            <div class="text-center">
+                                <span class="text-blue-600">Прогноз</span>
+                                <p class="text-3xl text-blue-700">32</p>
+                                <span class="text-sm font-normal text-blue-600">(+20)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Конец диаграммы роста -->
+
+
+                <!-- График -->
+                <h4 class="text-lg font-semibold text-gray-700 mt-4 mb-2">График активности (4 недели):</h4>
+                <ol class="list-decimal list-inside ml-4 text-lg text-gray-700 space-y-1">
+                    <li><strong>Неделя 1:</strong> Запуск VK Clips (2 000 ₽) - создание охвата.</li>
+                    <li><strong>Неделя 2:</strong> Посевы в Telegram (3 000 ₽) - привлечение подписчиков.</li>
+                    <li><strong>Неделя 3:</strong> Запуск VK Clips (2 000 ₽) - ретаргетинг на тех, кто видел ролик, но не перешел.</li>
+                    <li><strong>Неделя 4:</strong> Посевы в Telegram (3 000 ₽) - закрепление, набор второй волны.</li>
+                </ol>
+
+                <!-- Кнопка и блок расчетов -->
+                <div class="mt-6">
+                    <button id="toggle-calc-button" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg transition duration-200">
+                        Показать расчёты
+                    </button>
+                    <div id="calc-details" class="hidden mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200 shadow-inner">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-2">Логика расчётов (Теоретическая модель)</h4>
+                        <ul class="list-disc list-inside ml-4 text-base text-gray-700 space-y-2">
+                            <li>
+                                <strong>VK Clips (4 000 ₽):</strong> Мы предполагаем, что основная цель - дешевые просмотры. При примерной цене за 1000 показов (CPM) в 50 ₽, мы получаем: (4 000 ₽ / 50 ₽) * 1000 = 80 000 просмотров. 
+                                При консервативном CTR (Click-Through Rate) в 0.5%, это может дать: 80 000 * 0.005 = 400 переходов. 
+                                При консервативной конверсии в 5% на покупку курса Stepik, это может дать: 400 * 0.05 = 20 новых покупателей.
+                                Стоимость клика (CPC) составит: 4 000 ₽ / 400 = 10 ₽.
+                            </li>
+                            <li>
+                                <strong>Telegram Посевы (6 000 ₽):</strong> Здесь мы платим за подписчика (CPS - Cost Per Subscriber). Это более дорогая, но и более целевая аудитория. При средней рыночной цене за подписчика в образовательной нише в 30 ₽, мы получаем: 6 000 ₽ / 30 ₽ = 200 новых подписчиков. 
+                                Из этих 200 подписчиков, по воронке, 5-10 человек могут заинтересоваться курсом или репетиторством.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Секция 3: Команда и Роли -->
+            <section data-content="team" class="tab-content hidden bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">3. Команда и Распределение Ролей</h2>
+                <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                    Эффективность модели зависит от четкого распределения обязанностей.
+                </p>
+                
+                <!-- ИЗМЕНЕНИЕ: Заменен 'space-y-4' на 'grid grid-cols-1 lg:grid-cols-2 gap-6' -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Блок Павла -->
+                    <div class="p-4 bg-gray-50 rounded-lg border border-gray-200 flex flex-col sm:flex-row items-start sm:space-x-4">
+                        <!-- ФОТО ПАВЛА: Вставлена ссылка с GitHub Pages -->
+                        <img src="https://george-stone-pax.github.io/my-game-assets3/photo_2025-10-22_12-00-51.jpg" 
+                             alt="Фото Павел Кадошников" 
+                             class="w-24 h-24 rounded-full object-cover mb-4 sm:mb-0 flex-shrink-0"
+                             onerror="this.src='https://placehold.co/96x96/E0E7FF/4F46E5?text=Pavel'; this.onerror=null;">
+                        
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-semibold text-gray-900">Кадошников Павел</h3>
+                            <p class="text-blue-600 font-medium">Project Lead / Full-Stack Developer</p>
+                            <ul class="list-disc list-inside ml-4 text-base text-gray-600 mt-1">
+                                <li>Стратегическое развитие проекта.</li>
+                                <li>Разработка и поддержка сайта, игровых механик.</li>
+                                <li>Автор и техническая поддержка курса Stepik.</li>
+                                <li>Проведение репетиторских занятий.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Блок Марии -->
+                    <div class="p-4 bg-gray-50 rounded-lg border border-gray-200 flex flex-col sm:flex-row items-start sm:space-x-4">
+                        <!-- ФОТО МАРИИ: Вставлена ссылка с GitHub Pages -->
+                        <img src="https://george-stone-pax.github.io/my-game-assets3/photo_2024-11-27_12-32-58.jpg" 
+                             alt="Фото Лысенко Мария" 
+                             class="w-24 h-24 rounded-full object-cover mb-4 sm:mb-0 flex-shrink-0"
+                             onerror="this.src='https://placehold.co/96x96/E0E7FF/4F46E5?text=Maria'; this.onerror=null;">
+                             
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-semibold text-gray-900">Лысенко Мария</h3>
+                            <p class="text-blue-600 font-medium">Head of Methodology / Content Creator</p>
+                            <ul class="list-disc list-inside ml-4 text-base text-gray-600 mt-1">
+                                <li>Разработка образовательных программ и материалов для репетиторства.</li>
+                                <li>Методологическое наполнение контента для Telegram-канала.</li>
+                                <li>Проектирование содержания (нарратив, лексика) развивающих игр на сайте.</li>
+                                <li>Проведение репетиторских занятий.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Блок Виктории -->
+                    <div class="p-4 bg-gray-50 rounded-lg border border-gray-200 flex flex-col sm:flex-row items-start sm:space-x-4">
+                        <!-- ФОТО ВИКТОРИИ: Вставлена ссылка с GitHub Pages -->
+                        <img src="https://george-stone-pax.github.io/my-game-assets3/photo_2024-08-20_09-51-31.jpg" 
+                             alt="Фото Фролова Виктория" 
+                             class="w-24 h-24 rounded-full object-cover mb-4 sm:mb-0 flex-shrink-0"
+                             onerror="this.src='https://placehold.co/96x96/E0E7FF/4F46E5?text=Victoria'; this.onerror=null;">
+                             
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-semibold text-gray-900">Фролова Виктория</h3>
+                            <p class="text-blue-600 font-medium">Community & SMM Manager</p>
+                            <ul class="list-disc list-inside ml-4 text-base text-gray-600 mt-1">
+                                <li>Ведение и развитие Telegram-канала.</li>
+                                <li>Создание контент-плана, написание постов, проведение активностей.</li>
+                                <li>Закупка рекламы (посевы) в других каналах.</li>
+                                <li>Обратная связь с аудиторией в Telegram.</li>
+                                <li>Проведение репетиторских занятий.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Блок Элины -->
+                    <div class="p-4 bg-gray-50 rounded-lg border border-gray-200 flex flex-col sm:flex-row items-start sm:space-x-4">
+                        <!-- ФОТО ЭЛИНЫ: Вставлена ссылка с GitHub Pages -->
+                        <img src="https://george-stone-pax.github.io/my-game-assets3/photo_2025-05-08_06-48-39.jpg" 
+                             alt="Фото Джангозова Элина" 
+                             class="w-24 h-24 rounded-full object-cover mb-4 sm:mb-0 flex-shrink-0"
+                             onerror="this.src='https://placehold.co/96x96/E0E7FF/4F46E5?text=Elina'; this.onerror=null;">
+                             
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-semibold text-gray-900">Джангозова Элина</h3>
+                            <p class="text-blue-600 font-medium">Client Relations & VK Ads Specialist</p>
+                            <ul class="list-disc list-inside ml-4 text-base text-gray-600 mt-1">
+                                <li>Обработка входящих заявок на репетиторство.</li>
+                                <li>Администрирование: составление расписания, прием оплат, решение тех. проблем учеников.</li>
+                                <li>Сбор обратной связи (NPS - Net Promoter Score) для улучшения продукта.</li>
+                                <li>Запуск и ведение рекламных кампаний в VK Clips.</li>
+                                <li>Проведение репетиторских занятий.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Секция 4: Карьерный Рост -->
+            <section data-content="career" class="tab-content hidden bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">4. Карьерный Рост и Перспективы</h2>
+                <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                    Мы видим рост не как вертикальную лестницу "учитель -> директор", а как расширение компетенций и масштабирование проекта.
+                </p>
+
+                <!-- Инфографика: Ступени Роста -->
+                <h3 class="text-2xl font-semibold text-gray-700 mt-6 mb-2">Инфографика: "Ступени Роста Проекта"</h3>
+                <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+                    <!-- Ступень 1 -->
+                    <div class="flex-1 bg-gray-100 p-4 rounded-lg shadow-sm border-l-4 border-gray-400">
+                        <span class="text-base font-bold text-gray-500">ЭТАП 1: "Старт" (Текущий)</span>
+                        <h4 class="text-xl font-semibold text-gray-800 mt-1">Специалисты</h4>
+                        <p class="text-base text-gray-600">Каждый член команды - "многостаночник", совмещающий несколько ролей.
+                        <br><strong>Фокус:</strong> Создание продуктов (курс, сайт) и набор первой базы учеников.</p>
+                    </div>
+                    <!-- Ступень 2 -->
+                    <div class="flex-1 bg-blue-100 p-4 rounded-lg shadow-sm border-l-4 border-blue-400">
+                        <span class="text-base font-bold text-blue-500">ЭТАП 2: "Рост"</span>
+                        <h4 class="text-xl font-semibold text-blue-800 mt-1">Тимлиды / Наставники</h4>
+                        <p class="text-base text-blue-600">Масштабирование команды. Павел и Мария начинают нанимать и обучать новых репетиторов, передавая им методологию.
+                        <br><strong>Фокус:</strong> Построение команды, автоматизация процессов (CRM, автоворонки).</p>
+                    </div>
+                    <!-- Ступень 3 -->
+                    <div class="flex-1 bg-green-100 p-4 rounded-lg shadow-sm border-l-4 border-green-400">
+                        <span class="text-base font-bold text-green-500">ЭТАП 3: "Масштаб"</span>
+                        <h4 class="text-xl font-semibold text-green-800 mt-1">Руководители направлений</h4>
+                        <p class="text-base text-green-600">Формирование "Онлайн-школы". Павел - CEO/CTO. Мария - Head of Product. Виктория - Head of Marketing. Элина - Head of Operations.
+                        <br><strong>Фокус:</strong> Выход на новые рынки (B2B, корпоративный английский), создание новых курсов.</p>
+                    </div>
+                </div>
+
+                <!-- Инфографика: Дерево Перспективы -->
+                <h3 class="text-2xl font-semibold text-gray-700 mt-8 mb-2">Инфографика: "Дерево Перспективы" (для каждого)</h3>
+                <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                    Карьерный рост — это развитие из "ствола" (базовые навыки) в "ветви" (специализации).
+                </p>
+                <div class="p-4 bg-yellow-50 rounded-lg shadow-inner">
+                    <h4 class="text-xl font-semibold text-yellow-800 mb-2">Ствол (Общая база):</h4>
+                    <p class="text-lg text-yellow-700">Педагогический дизайн, digital-маркетинг, управление проектами, C1+ English.</p>
+                    
+                    <h4 class="text-xl font-semibold text-yellow-800 mt-4 mb-2">Ветви (Индивидуальные траектории):</h4>
+                    <ul class="list-none space-y-2 text-base">
+                        <li><strong class->Павел:</strong> (Developer) ➔ (EdTech Product Manager) ➔ (CTO / Основатель EdTech-стартапа)</li>
+                        <li><strong class->Мария:</strong> (Methodologist) ➔ (Academic Director) ➔ (Автор востребованных методик / Спикер)</li>
+                        <li><strong class->Виктория:</strong> (SMM Manager) ➔ (Head of Content Marketing) ➔ (CMO / Директор по маркетингу)</li>
+                        <li><strong class->Элина:</strong> (Client Support) ➔ (Client Success & VK Ads Specialist) ➔ (COO / Head of Operations)</li>
                     </ul>
                 </div>
-                <div class="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-6 rounded-r-lg">
-                    <h3 class="font-bold text-lg mb-3">Риски и ограничения:</h3>
-                    <p>Ключевой задачей является обеспечение безопасности и конфиденциальности данных, а также установление четких правил использования платформ для предотвращения нецелевого общения и кибербуллинга.</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="cases" class="mb-16 md:mb-24 scroll-mt-20">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-4">Практические кейсы: Школы</h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">Анализ показывает, как современные школы выстраивают свои цифровые коммуникационные экосистемы.</p>
-            <div class="flex justify-center mb-8">
-                <div class="flex space-x-2 bg-gray-200 p-1 rounded-full">
-                    <button id="btn-school1415" class="tab-btn px-4 py-2 text-sm font-medium rounded-full transition-colors duration-300">Школа №1415</button>
-                    <button id="btn-gazprom" class="tab-btn px-4 py-2 text-sm font-medium rounded-full transition-colors duration-300">Школа Газпромбанка</button>
-                </div>
-            </div>
-            <div id="case-content" class="bg-white p-6 md:p-8 rounded-xl shadow-lg transition-opacity duration-500">
-            </div>
-        </section>
+            <!-- Секция 5: Ресурсы и Развитие -->
+            <section data-content="resources" class="tab-content hidden bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">5. Ресурсы Обучения и Повышение Квалификации</h2>
+                
+                <h3 class="text-2xl font-semibold text-gray-700 mt-4 mb-2">Требования к ресурсам обучения (для команды)</h3>
+                <p class="text-lg text-gray-700 leading-relaxed mb-2">
+                    Чтобы поддерживать высокое качество продукта, команда должна постоянно развиваться.
+                </p>
+                <ul class="list-disc list-inside ml-4 text-lg text-gray-700 space-y-2">
+                    <li><strong class="font-semibold">Методология (Мария, Павел):</strong>
+                        <ul class="list-inside list-['-_'] ml-6 text-base text-gray-600">
+                            <li>Обязательное наличие международных сертификатов (TKT, CELTA или эквиваленты).</li>
+                            <li>Регулярное изучение трендов в Communicative Approach и Task-Based Learning.</li>
+                        </ul>
+                    </li>
+                    <li><strong class="font-semibold">Разработка (Павел):</strong>
+                        <ul class="list-inside list-['-_'] ml-6 text-base text-gray-600">
+                            <li>Владение стеком: HTML, CSS, JavaScript (для интерактивных игр).</li>
+                            <li>Изучение фреймворков (React/Vue) для создания более сложных игровых механик.</li>
+                            <li>Понимание принципов геймификации и UX/UI-дизайна в образовании.</li>
+                        </ul>
+                    </li>
+                    <li><strong class="font-semibold">Маркетинг (Виктория):</strong>
+                        <ul class="list-inside list-['-_'] ml-6 text-base text-gray-600">
+                            <li>Навыки копирайтинга, SMM, анализа ЦА.</li>
+                            <li>Умение работать с рекламными кабинетами (посевы в TG) и аналитикой (TGStat).</li>
+                        </ul>
+                    </li>
+                    <li><strong class="font-semibold">Клиентский сервис и Реклама (Элина):</strong>
+                        <ul class="list-inside list-['-_'] ml-6 text-base text-gray-600">
+                            <li>Навыки работы с CRM-системами и скриптами продаж.</li>
+                            <li>Умение настраивать таргетированную рекламу в VK Реклама, A/B-тестирование креативов.</li>
+                        </ul>
+                    </li>
+                </ul>
 
-        <section id="future" class="mb-16 md:mb-24 scroll-mt-20">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-4">Будущее за специализированными решениями</h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">С недавнего времени мессенджер <span class="font-bold text-blue-600">MAX</span> стал обязательным в сфере образования, предлагая безопасную и управляемую среду.</p>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                <div class="bg-white p-5 rounded-lg border border-gray-200">
-                    <h3 class="font-semibold text-gray-800 mb-1">Целевое назначение</h3>
-                    <p class="text-sm text-gray-600">Разработан специально для нужд образовательной сферы.</p>
-                </div>
-                <div class="bg-white p-5 rounded-lg border border-gray-200">
-                    <h3 class="font-semibold text-gray-800 mb-1">Безопасность</h3>
-                    <p class="text-sm text-gray-600">Обеспечение защищенной и конфиденциальной среды для обмена данными.</p>
-                </div>
-                <div class="bg-white p-5 rounded-lg border border-gray-200">
-                    <h3 class="font-semibold text-gray-800 mb-1">Удобство</h3>
-                    <p class="text-sm text-gray-600">Унифицированный и управляемый канал для всех коммуникаций.</p>
-                </div>
-                <div class="bg-white p-5 rounded-lg border border-gray-200">
-                    <h3 class="font-semibold text-gray-800 mb-1">Интеграция</h3>
-                    <p class="text-sm text-gray-600">Поддержка административных процессов и рабочих задач.</p>
-                </div>
-                <div class="bg-white p-5 rounded-lg border border-gray-200">
-                    <h3 class="font-semibold text-gray-800 mb-1">Вовлечённость</h3>
-                    <p class="text-sm text-gray-600">Простой и эффективный инструмент для всех участников процесса.</p>
-                </div>
-                <div class="bg-blue-50 p-5 rounded-lg border border-blue-200 text-center flex items-center justify-center">
-                    <p class="text-blue-700 font-medium">Современный, удобный и безопасный инструмент для управления учебным процессом.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="conclusion" class="scroll-mt-20">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Итоги и перспективы</h2>
-            <div class="bg-white rounded-xl shadow-lg p-8 md:p-10 max-w-4xl mx-auto">
-                <p class="text-gray-700 mb-4">Современные школы активно формируют единые цифровые коммуникационные пространства, объединяя педагогов, родителей, учеников и администрацию. Эта практика способствует <span class="font-semibold">оперативности, прозрачности и вовлечённости</span> всех участников образовательного процесса.</p>
-                <p class="text-gray-700 font-medium text-blue-700">Переход к специализированным решениям, таким как мессенджер MAX, открывает перспективы создания безопасной, управляемой и максимально эффективной цифровой среды в системе российского образования.</p>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="text-center py-8 mt-12 border-t">
-        <p class="text-gray-500 text-sm">Интерактивный отчет, 2025</p>
-    </footer>
+                <h3 class="text-2xl font-semibold text-gray-700 mt-6 mb-2">Самообразование и Повышение Квалификации</h3>
+                <ul class="list-disc list-inside ml-4 text-lg text-gray-700 space-y-2">
+                    <li><strong class="font-semibold">Внутренние митапы:</strong> Еженедельный обмен знаниями. (Например, Павел рассказывает о новой фиче сайта, Мария - о новой методике).</li>
+                    <li><strong class="font-semibold">Бюджет на обучение:</strong> Выделение % от прибыли на покупку курсов для членов команды.</li>
+                    <li><strong class="font-semibold">Участие в конференциях:</strong> Посещение (онлайн или офлайн) профильных мероприятий (EdTech, SMM, Dev).</li>
+                    <li><strong class="font-semibold">"Петля обратной связи":</strong> Регулярный анализ отзывов учеников (от Элины) для немедленной доработки продукта (Павлом и Марией).</li>
+                </ul>
+            </section>
+        </main>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const caseData = {
-                school1415: {
-                    title: 'Кейс: Школа №1415 Останкино, г. Москва',
-                    description: 'Школа использует популярные мессенджеры для решения ключевых коммуникационных задач, охватывая как внутренние, так и внешние процессы.',
-                    channels: [
-                        { name: 'Telegram', use: 'Основной канал для внутренней коммуникации педагогов и оперативного информирования родителей.' },
-                        { name: 'WhatsApp', use: 'Используется для быстрой связи в родительских чатах и координации по классам.' },
-                        { name: 'Другие каналы', use: 'Дополнительные средства связи для административных и организационных вопросов.' }
-                    ],
-                    chart: null
-                },
-                gazprom: {
-                    title: 'Кейс: ОЧУ «Школа Газпромбанка»',
-                    description: 'Школа выстроила системную и многоуровневую коммуникацию, разделяя каналы по целям и аудиториям для максимальной эффективности.',
-                    channels: [
-                        { name: 'Telegram и WhatsApp', use: 'Для оперативного общения внутри коллектива и с родителями.' },
-                        { name: 'Gmail', use: 'Для официальной переписки с учениками по учебным вопросам.' },
-                        { name: 'Telegram и VK', use: 'Каналы для внешней информационной поддержки и продвижения школьной жизни.' }
-                    ],
-                    chart: {
-                        labels: ['Внутренние операции', 'Общение с родителями', 'Связь с учениками', 'Внешние коммуникации'],
-                        data: [2, 2, 1, 2],
-                        label: 'Количество каналов по задачам'
-                    }
-                }
-            };
-
-            const contentContainer = document.getElementById('case-content');
-            const btnSchool1415 = document.getElementById('btn-school1415');
-            const btnGazprom = document.getElementById('btn-gazprom');
-            let chartInstance = null;
-
-            function renderCase(data) {
-                contentContainer.innerHTML = '';
-                contentContainer.style.opacity = 0;
-
-                let html = `
-                    <h3 class="font-bold text-xl mb-2">${data.title}</h3>
-                    <p class="text-gray-600 mb-6">${data.description}</p>
-                    <div class="grid ${data.chart ? 'md:grid-cols-2' : ''} gap-8 items-center">
-                        <div>
-                            <h4 class="font-semibold mb-4">Каналы коммуникации:</h4>
-                            <ul class="space-y-3">
-                                ${data.channels.map(ch => `
-                                    <li class="p-3 bg-gray-50 rounded-lg border-l-4 border-blue-500">
-                                        <p class="font-medium text-gray-800">${ch.name}</p>
-                                        <p class="text-sm text-gray-600">${ch.use}</p>
-                                    </li>
-                                `).join('')}
-                            </ul>
-                        </div>
-                        ${data.chart ? `
-                        <div class="mt-6 md:mt-0">
-                             <div class="chart-container">
-                                <canvas id="caseChart"></canvas>
-                             </div>
-                        </div>
-                        ` : '<div class="hidden md:block p-4 bg-gray-50 rounded-lg text-center text-gray-500">Визуализация для данного кейса не предусмотрена.</div>'}
-                    </div>
-                `;
-                
-                setTimeout(() => {
-                    contentContainer.innerHTML = html;
-                    contentContainer.style.opacity = 1;
-                    if (data.chart) {
-                        renderChart(data.chart);
-                    }
-                }, 100);
-            }
-
-            function renderChart(chartData) {
-                if (chartInstance) {
-                    chartInstance.destroy();
-                }
-                const ctx = document.getElementById('caseChart').getContext('2d');
-                chartInstance = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: chartData.labels,
-                        datasets: [{
-                            label: chartData.label,
-                            data: chartData.data,
-                            backgroundColor: 'rgba(59, 130, 246, 0.5)',
-                            borderColor: 'rgba(59, 130, 246, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    stepSize: 1
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            title: {
-                                display: true,
-                                text: 'Уровни коммуникационной системы'
-                            }
-                        }
-                    }
-                });
-            }
-
-            btnSchool1415.addEventListener('click', () => {
-                btnSchool1415.classList.add('active');
-                btnGazprom.classList.remove('active');
-                renderCase(caseData.school1415);
-            });
-
-            btnGazprom.addEventListener('click', () => {
-                btnGazprom.classList.add('active');
-                btnSchool1415.classList.remove('active');
-                renderCase(caseData.gazprom);
-            });
+            const tabNav = document.getElementById('tab-nav');
+            const tabContent = document.getElementById('tab-content');
             
-            btnSchool1415.click();
+            // Получаем все кнопки вкладок и секции контента
+            const tabButtons = tabNav.querySelectorAll('.tab-button');
+            const contentSections = tabContent.querySelectorAll('.tab-content');
 
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('section[id]');
+            // Устанавливаем первую вкладку как активную по умолчанию
+            if (tabButtons.length > 0 && contentSections.length > 0) {
+                tabButtons[0].classList.add('active');
+                contentSections[0].classList.remove('hidden');
+            }
 
-            window.addEventListener('scroll', () => {
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (pageYOffset >= sectionTop - 80) {
-                        current = section.getAttribute('id');
-                    }
+            tabNav.addEventListener('click', (e) => {
+                // Ищем нажатую кнопку
+                const clickedButton = e.target.closest('.tab-button');
+                if (!clickedButton) return; // Клик не по кнопке
+
+                // Получаем ID вкладки из data-атрибута
+                const tabId = clickedButton.dataset.tab;
+                if (!tabId) return;
+
+                // 1. Убираем 'active' у всех кнопок
+                tabButtons.forEach(button => {
+                    button.classList.remove('active');
                 });
 
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').includes(current)) {
-                        link.classList.add('active');
-                    }
+                // 2. Скрываем весь контент
+                contentSections.forEach(section => {
+                    section.classList.add('hidden');
                 });
+
+                // 3. Добавляем 'active' нажатой кнопке
+                clickedButton.classList.add('active');
+
+                // 4. Показываем нужный контент
+                const targetContent = tabContent.querySelector(`[data-content="${tabId}"]`);
+                if (targetContent) {
+                    targetContent.classList.remove('hidden');
+                }
             });
+
+            // --- НОВЫЙ КОД ДЛЯ КНОПКИ РАСЧЕТОВ ---
+            const toggleBtn = document.getElementById('toggle-calc-button');
+            const calcDetails = document.getElementById('calc-details');
+
+            if (toggleBtn && calcDetails) {
+                toggleBtn.addEventListener('click', () => {
+                    const isHidden = calcDetails.classList.toggle('hidden');
+                    if (isHidden) {
+                        toggleBtn.textContent = 'Показать расчёты';
+                    } else {
+                        toggleBtn.textContent = 'Скрыть расчёты';
+                    }
+                });
+            }
+            // --- КОНЕЦ НОВОГО КОДА ---
 
         });
     </script>
+
 </body>
 </html>
+
+
+
+
+
+
