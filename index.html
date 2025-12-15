@@ -27,6 +27,10 @@
             border-bottom-color: transparent;
             transition: all 0.3s ease;
         }
+        /* Утилита для скрытия скроллбара в модалке при необходимости */
+        .no-scroll {
+            overflow: hidden;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -57,6 +61,9 @@
             <button data-tab="resources" class="tab-button py-3 px-4 text-sm md:text-base font-medium text-gray-600 hover:text-blue-600">
                 5. Ресурсы и Развитие
             </button>
+            <button data-tab="risks" class="tab-button py-3 px-4 text-sm md:text-base font-medium text-gray-600 hover:text-blue-600">
+                6. Ключевые Риски
+            </button>
         </nav>
 
         <!-- Контент вкладок -->
@@ -75,14 +82,14 @@
                         <p class="text-base text-blue-700">Бесплатный ценный контент:</p>
                         <ul class="list-disc list-inside ml-2 text-base text-blue-700 mt-2">
                             <li>Telegram-канал (посты, викторины)</li>
-                            <li>Сайт (бесплатные игры, статьи)</li>
+                            <li>Сайт (бесплатные игры)</li>
                         </ul>
                     </div>
                     <div class="bg-green-50 p-4 rounded-lg shadow">
                         <h3 class="font-bold text-green-800">2. Вовлечение (Продукт-магнит)</h3>
                         <p class="text-base text-green-700">Недорогой и полезный продукт:</p>
                         <ul class="list-disc list-inside ml-2 text-base text-green-700 mt-2">
-                            <li>Курс на Stepik (500 руб.)</li>
+                            <li>Курс на Stepik (1000 руб.)</li>
                             <li>Интеграция курса с играми на сайте</li>
                         </ul>
                     </div>
@@ -428,7 +435,127 @@
                     <li><strong class="font-semibold">"Петля обратной связи":</strong> Регулярный анализ отзывов учеников (от Элины) для немедленной доработки продукта (Павлом и Марией).</li>
                 </ul>
             </section>
+
+             <!-- Секция 6: Ключевые Риски -->
+             <section data-content="risks" class="tab-content hidden bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">6. Ключевые Риски и Смягчающие Действия</h2>
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    Анализ потенциальных угроз и план действий (Plan B) для устойчивости бизнес-модели.
+                </p>
+
+                <div class="space-y-6">
+                    <!-- Риск 1 -->
+                    <div class="border-l-4 border-red-500 bg-red-50 p-4 rounded-r-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-red-800 mb-2">1. Высокая конкуренция</h3>
+                        <div class="mb-2">
+                            <span class="font-semibold text-red-700 block md:inline">Последствие:</span>
+                            <span class="text-gray-700">Рост CAC (стоимость привлечения клиента), снижение конверсии.</span>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-green-700 block md:inline">Решение:</span>
+                            <span class="text-gray-700">Упор на синергию «дети+взрослые», уникальный игровой формат, создание нишевых курсов, которые выделяют школу на фоне конкурентов.</span>
+                        </div>
+                    </div>
+
+                    <!-- Риск 2 -->
+                    <div class="border-l-4 border-orange-500 bg-orange-50 p-4 rounded-r-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-orange-800 mb-2">2. Сезонность (летние месяцы)</h3>
+                        <div class="mb-2">
+                            <span class="font-semibold text-orange-700 block md:inline">Последствие:</span>
+                            <span class="text-gray-700">Падение спроса на услуги в летний период.</span>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-green-700 block md:inline">Решение:</span>
+                            <span class="text-gray-700">Организация летних интенсивов, разговорных лагерей и активное взаимодействие с корпоративными клиентами для проведения программ в летний период.</span>
+                        </div>
+                    </div>
+
+                    <!-- Риск 3 (Добавленный) -->
+                    <div class="border-l-4 border-purple-500 bg-purple-50 p-4 rounded-r-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-purple-800 mb-2">3. Риск "Выгорания" Ключевой Команды</h3>
+                        <div class="mb-2">
+                            <span class="font-semibold text-purple-700 block md:inline">Последствие:</span>
+                            <span class="text-gray-700">Так как на старте все совмещают несколько ролей, есть риск снижения качества преподавания или контента из-за усталости.</span>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-green-700 block md:inline">Решение:</span>
+                            <span class="text-gray-700">Четкий график отпусков, автоматизация рутины (через сайт и боты) и постепенный найм помощников (ассистентов) при выходе на стабильную прибыль.</span>
+                        </div>
+                    </div>
+
+                    <!-- Риск 4 (Добавленный) -->
+                    <div class="border-l-4 border-gray-500 bg-gray-50 p-4 rounded-r-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">4. Зависимость от сторонней платформы (Stepik)</h3>
+                        <div class="mb-2">
+                            <span class="font-semibold text-gray-700 block md:inline">Последствие:</span>
+                            <span class="text-gray-600">Изменение комиссий Stepik или технические сбои могут повлиять на "Продукт-магнит".</span>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-green-700 block md:inline">Решение:</span>
+                            <span class="text-gray-700">Использование собственного сайта как резервной площадки. Постепенный перенос части мини-курсов на собственную платформу для полного контроля.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </main>
+        
+        <!-- Секция: Наши Ресурсы (Постоянный блок) -->
+        <!-- ОБНОВЛЕНО: Темный фон, скругленные углы, отступы -->
+        <footer class="mt-12 bg-gray-900 rounded-3xl p-8 mb-12 shadow-2xl">
+            <h2 class="text-3xl font-bold text-white mb-6 text-center">Наши Ресурсы</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Telegram -->
+                <!-- ОБНОВЛЕНО: Картинка внутри теперь в контейнере и уменьшена -->
+                <a href="#" id="telegram-card" data-link="https://t.me/your_english_tutor_is_here" class="group block relative overflow-hidden aspect-square border-4 border-gray-700 hover:border-blue-500 transition-all duration-300 bg-white rounded-xl">
+                    <div class="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-10 transition duration-500 z-10"></div>
+                    <!-- Контейнер для центрирования и уменьшения картинки -->
+                    <div class="w-full h-full flex items-center justify-center p-4">
+                        <img src="https://george-stone-pax.github.io/my-game-assets/photo_2025-12-16_00-06-29.jpg" 
+                             alt="Telegram Channel" 
+                             class="w-3/4 h-3/4 object-cover shadow-lg rounded-lg transform transition duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                        <p class="text-white font-bold text-lg">Telegram Channel</p>
+                    </div>
+                </a>
+
+                <!-- Website -->
+                <a href="https://sites.google.com/view/your-english-tutor-is-here/home" target="_blank" class="group block relative overflow-hidden aspect-square border-4 border-gray-700 hover:border-purple-500 transition-all duration-300 bg-white rounded-xl">
+                    <div class="absolute inset-0 bg-purple-600 opacity-0 group-hover:opacity-10 transition duration-500 z-10"></div>
+                    <img src="https://george-stone-pax.github.io/my-game-assets/photo_2024-10-21_22-58-30%20(1).jpg" 
+                         alt="Official Website" 
+                         class="w-full h-full object-cover transform transition duration-700 group-hover:scale-110">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                        <p class="text-white font-bold text-lg">Official Website</p>
+                    </div>
+                </a>
+
+                <!-- Stepik -->
+                <a href="https://stepik.org/a/235360" target="_blank" class="group block relative overflow-hidden aspect-square border-4 border-gray-700 hover:border-green-500 transition-all duration-300 bg-white rounded-xl">
+                     <div class="absolute inset-0 bg-green-600 opacity-0 group-hover:opacity-10 transition duration-500 z-10"></div>
+                    <div class="w-full h-full bg-white flex items-center justify-center">
+                        <img src="https://george-stone-pax.github.io/my-game-assets/logo.png" 
+                             alt="Stepik Course" 
+                             class="w-full h-full object-contain p-8 transform transition duration-700 group-hover:rotate-6 group-hover:scale-110">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                        <p class="text-white font-bold text-lg">Stepik Course</p>
+                    </div>
+                </a>
+
+            </div>
+        </footer>
+    </div>
+
+    <!-- Модальное окно для Telegram -->
+    <!-- ОБНОВЛЕНО: max-w уменьшен до 50% -->
+    <div id="image-modal" class="fixed inset-0 bg-black/90 hidden z-50 flex items-center justify-center cursor-pointer opacity-0 transition-opacity duration-300">
+        <div class="relative max-w-[50%] max-h-[80%] transform scale-95 transition-transform duration-300" id="modal-content">
+            <img id="modal-img" src="" class="w-full h-full object-contain shadow-2xl rounded-lg cursor-pointer hover:scale-[1.02] transition-transform duration-300" title="Click to open link">
+            <p class="text-white text-center mt-4 text-lg font-medium opacity-80">Нажмите на изображение, чтобы перейти в Telegram</p>
+        </div>
     </div>
 
     <script>
@@ -475,7 +602,7 @@
                 }
             });
 
-            // --- НОВЫЙ КОД ДЛЯ КНОПКИ РАСЧЕТОВ ---
+            // --- КОД ДЛЯ КНОПКИ РАСЧЕТОВ ---
             const toggleBtn = document.getElementById('toggle-calc-button');
             const calcDetails = document.getElementById('calc-details');
 
@@ -489,16 +616,60 @@
                     }
                 });
             }
-            // --- КОНЕЦ НОВОГО КОДА ---
+
+            // --- ЛОГИКА ДЛЯ TELEGRAM И МОДАЛЬНОГО ОКНА ---
+            const telegramCard = document.getElementById('telegram-card');
+            const modal = document.getElementById('image-modal');
+            const modalContent = document.getElementById('modal-content');
+            const modalImg = document.getElementById('modal-img');
+            
+            if (telegramCard && modal && modalImg) {
+                const targetLink = telegramCard.getAttribute('data-link');
+                const cardImage = telegramCard.querySelector('img');
+
+                // 1. Клик по карточке -> Открыть модальное окно
+                telegramCard.addEventListener('click', (e) => {
+                    e.preventDefault(); // Запрещаем мгновенный переход
+                    if (cardImage) {
+                        modalImg.src = cardImage.src; // Берем картинку из карточки
+                        modal.classList.remove('hidden');
+                        // Небольшая задержка для плавного появления
+                        requestAnimationFrame(() => {
+                            modal.classList.remove('opacity-0');
+                            modalContent.classList.remove('scale-95');
+                            modalContent.classList.add('scale-100');
+                        });
+                        document.body.classList.add('no-scroll'); // Блокируем скролл страницы
+                    }
+                });
+
+                // 2. Клик по картинке в модалке -> Переход по ссылке
+                modalImg.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Чтобы не сработало закрытие по фону
+                    window.open(targetLink, '_blank');
+                    closeModal();
+                });
+
+                // 3. Клик по фону -> Закрыть модальное окно
+                modal.addEventListener('click', () => {
+                    closeModal();
+                });
+
+                function closeModal() {
+                    modal.classList.add('opacity-0');
+                    modalContent.classList.remove('scale-100');
+                    modalContent.classList.add('scale-95');
+                    
+                    // Ждем окончания анимации перед скрытием
+                    setTimeout(() => {
+                        modal.classList.add('hidden');
+                        document.body.classList.remove('no-scroll');
+                    }, 300);
+                }
+            }
 
         });
     </script>
 
 </body>
 </html>
-
-
-
-
-
-
